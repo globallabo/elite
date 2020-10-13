@@ -75,15 +75,8 @@ footer {
   justify-content: flex-end;
   align-items: flex-end;
 }
-footer .logo-text {
-  font-size: 14pt;
-}
-footer .logo-text-accent {
-  font-style: italic;
-}
 footer img.logo {
-  height: 1em;
-  padding-bottom: 0.8em;
+  height: 3em;
 }
 
 .image-page .main-image {
