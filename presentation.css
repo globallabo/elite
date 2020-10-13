@@ -1,0 +1,168 @@
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'MPLUS1p-Regular';
+  src: url('../fonts/MPLUS1p-Regular.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'MPLUS1p-Medium';
+  src: url('../fonts/MPLUS1p-Medium.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'MPLUS1p-Bold';
+  src: url('../fonts/MPLUS1p-Bold.ttf')  format('truetype');
+}
+
+body {
+  font-family: 'MPLUS1p-Regular';
+  color: #666666;
+}
+.a-label {
+  color: #6FA8DC;
+}
+.b-label {
+  color: #E06666;
+}
+.jp-text {
+  color: #E69138;
+}
+
+section {
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+
+header {
+/* background-color: green; */
+  top: 0;
+  left: 0;
+  /* width: 100%; */
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; */
+}
+header .label {
+/* background-color: blue; */
+  top: 0;
+  left: 0;
+  /* width: 100%; */
+  padding: 2em;
+  font-size: 14pt;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+header .label span {
+  margin-right: 2em;
+}
+header .label .page-number {
+  margin-left: auto;
+  margin-right: 0;
+}
+footer {
+/*background-color: red;*/
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* width: 100%; */
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+footer .logo-text {
+  font-size: 14pt;
+}
+footer .logo-text-accent {
+  font-style: italic;
+}
+footer img.logo {
+  height: 1em;
+  padding-bottom: 0.8em;
+}
+
+.image-page .main-image {
+  margin-left: 2em;
+}
+.image-page .main-image img {
+  width: 75%;
+}
+
+.dialogue-page .content {
+  margin-top: 5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.dialogue-page .main-image {
+  height: 15em;
+}
+.dialogue-page .dialogue {
+  font-size: 17pt;
+  margin-left: 2em;
+}
+.dialogue-page .dialogue-en {
+  margin-bottom: 1.5em;
+}
+.a-label, .b-label {
+  font-weight: bold;
+  margin-right: 1.5em;
+}
+.dialogue-page .dialogue-jp {
+  font-size: 15pt;
+  margin-top: -1.5em;
+  margin-left: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.target {
+  font-size: 22pt;
+  margin-top: 5em;
+  margin-left: 4em;
+}
+.target-en {
+  margin-bottom: 1.5em;
+}
+
+.substitutions-page .substitutions {
+  font-size: 20pt;
+  margin-top: 3em;
+  margin-left: 6em;
+}
+.substitutions-page .substitutions .vocab-list li {
+  float: left;
+  margin-right: 3em;
+}
+.substitutions-page .substitutions .vocab-list .vocab-jp {
+  font-size: 13.5pt;
+}
+
+.vocab-page .vocab {
+  font-size: 20pt;
+  margin-top: 2em;
+  margin-left: 6em;
+}
+.vocab-page .vocab .vocab-list {
+}
+.vocab-page .vocab .vocab-list li {
+  margin-bottom: 1.5em;
+}
+
+.extensions-page .extensions {
+  font-size: 17pt;
+  margin-top: 3em;
+  margin-left: 6em;
+}
+.extensions-page .extensions .extensions-list li {
+  margin-bottom: 2em;
+}
+.extensions-page .extension-jp {
+  margin-top: -2em;
+  /* margin-left: 0.5em; */
+  margin-bottom: 0.5em;
+}
