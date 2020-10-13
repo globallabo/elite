@@ -19,7 +19,7 @@ for level in levels:
     print(f'Level {level}')
     # Create HTML template
     font_config = FontConfiguration()
-    template_filename = f'BN{level}-presentation-template.html'
+    template_filename = f'EB{level}-presentation-template.html'
     with open(template_filename, "r") as template_file:
         template_file_contents = template_file.read()
     template_string = Template(template_file_contents)
@@ -28,7 +28,7 @@ for level in levels:
         css_string = css_file.read()
 
     # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
-    output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/Business Next/test-output/Level {level}/'
+    output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/EliteBusiness/test-output/Level {level}/'
 
     # Fetch data from Google Sheet
     scope = ["https://spreadsheets.google.com/feeds",
@@ -91,4 +91,4 @@ for level in levels:
             f_unit = str(unit).zfill(2)
             f_lesson = str(lesson).zfill(2)
 
-            html.write_pdf(f'{output_path}bn{f_level}U{f_unit}L{f_lesson}.pdf')
+            html.write_pdf(f'{output_path}EB{f_level}U{f_unit}L{f_lesson}.pdf')
