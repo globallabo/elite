@@ -147,15 +147,16 @@ footer .logo-text {
 }
 
 .extensions-page .extensions {
-  font-size: 17pt;
-  margin-top: 3em;
-  margin-left: 6em;
+  font-size: 30pt;
+  margin-top: 1em;
+  margin-left: 3em;
 }
 .extensions-page .extensions .extensions-list li {
   margin-bottom: 2em;
 }
 .extensions-page .extension-jp {
-  margin-top: -1.7em;
+  font-size: 19pt;
+  margin-top: -3em;
   /* margin-left: 0.5em; */
-  margin-bottom: 0.7em;
+  margin-bottom: 2em;
 }
