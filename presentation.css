@@ -27,7 +27,7 @@ body {
   color: #E06666;
 }
 .jp-text {
-  color: #E69138;
+  /* color: #E69138; */
 }
 
 section {
@@ -91,30 +91,24 @@ footer .logo-text {
 }
 
 .dialogue-page .content {
-  margin-top: 5em;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.dialogue-page .main-image {
-  height: 15em;
+  margin-top: 4em;
 }
 .dialogue-page .dialogue {
-  font-size: 17pt;
-  margin-left: 2em;
+  font-size: 30pt;
+  margin-left: 1.5em;
 }
 .dialogue-page .dialogue-en {
   margin-bottom: 1.5em;
 }
 .a-label, .b-label {
   font-weight: bold;
-  margin-right: 1.5em;
+  margin-right: 1em;
 }
 .dialogue-page .dialogue-jp {
-  font-size: 15pt;
-  margin-top: -1.5em;
-  margin-left: 2.5em;
-  margin-bottom: 0.5em;
+  font-size: 19pt;
+  margin-top: -2em;
+  margin-left: 2.8em;
+  margin-bottom: 1em;
 }
 
 .target {
