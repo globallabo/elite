@@ -90,11 +90,9 @@ footer .logo-text {
   width: 80%;
 }
 
-.dialogue-page .content {
-  margin-top: 4em;
-}
 .dialogue-page .dialogue {
   font-size: 30pt;
+  margin-top: 1em;
   margin-left: 1.5em;
 }
 .dialogue-page .dialogue-en {
@@ -112,9 +110,9 @@ footer .logo-text {
 }
 
 .target {
-  font-size: 22pt;
-  margin-top: 5em;
-  margin-left: 4em;
+  font-size: 30pt;
+  margin-top: 1em;
+  margin-left: 1.5em;
 }
 .target-en {
   margin-bottom: 1.5em;
