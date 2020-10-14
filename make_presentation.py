@@ -14,10 +14,10 @@ logger.addHandler(logging.FileHandler('/tmp/weasyprint.log'))
 levels = [1]
 # There are 6 units per level
 # units = [1, 2, 3, 4, 5, 6]
-units = [1]
+units = [6]
 # There are 4 lessons per unit, but the last is a review unit with no materials
 # lessons = [1, 2, 3]
-lessons = [1]
+lessons = [3]
 
 for level in levels:
     print(f'Level {level}')
@@ -58,6 +58,9 @@ for level in levels:
             #  and columns at 1, while the Python dict begins at 0,0
             row = 1 + ((unit - 1) * 13) + ((lesson - 1) * 4)
             column = 1
+            # Unit titles are only listed next to the first lesson, so
+            #  we need a special variable for that
+            unit_row = 1 + ((unit - 1) * 13)
 
             # Create substitution mapping
             template_mapping = dict()
@@ -66,16 +69,20 @@ for level in levels:
             template_mapping["unit"] = unit
             template_mapping["lesson"] = lesson
             print(f'Level: {level}, Unit: {unit}, Lesson: {lesson}')
-            template_mapping["unit_title"] = data[row][column]
+            template_mapping["unit_title"] = data[unit_row][column]
             template_mapping["lesson_title"] = data[row][column + 1]
             template_mapping["dialogue_a1_en"] = data[row][column + 4]
             template_mapping["dialogue_b1_en"] = data[row + 1][column + 4]
             template_mapping["dialogue_a2_en"] = data[row + 2][column + 4]
             template_mapping["dialogue_b2_en"] = data[row + 3][column + 4]
-            template_mapping["dialogue_a1_jp"] = data[row][column + 5]
-            template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
-            template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
-            template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
+            template_mapping["dialogue_a1_jp"] = "悩んでいるみたいですね。"
+            template_mapping["dialogue_b1_jp"] = "そうなんですよ。このデータの作成手伝ってくれませんか。"
+            template_mapping["dialogue_a2_jp"] = "もちろんです。どうしましたか。"
+            template_mapping["dialogue_b2_jp"] = "どうしても（データが）合わないんですよ。"
+            # template_mapping["dialogue_a1_jp"] = data[row][column + 5]
+            # template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
+            # template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
+            # template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
             template_mapping["target_a_en"] = data[row][column + 7]
             template_mapping["target_b_en"] = data[row + 1][column + 7]
             template_mapping["vocab1_en"] = data[row][column + 8]
@@ -86,9 +93,9 @@ for level in levels:
             template_mapping["vocab2_jp"] = "報告書"
             template_mapping["vocab3_jp"] = "図式"
             template_mapping["vocab4_jp"] = "プレゼンテーション"
-            template_mapping["extension1_en"] = data[row][column + 9]
-            template_mapping["extension2_en"] = data[row + 1][column + 9]
-            template_mapping["extension3_en"] = data[row + 2][column + 9]
+            template_mapping["extension1_en"] = data[row][column + 11]
+            template_mapping["extension2_en"] = data[row + 1][column + 11]
+            template_mapping["extension3_en"] = data[row + 2][column + 11]
             template_mapping["extension1_jp"] = "このデータの作成を手伝ってくれませんか。"
             template_mapping["extension2_jp"] = "こちらのデータの作成を手伝っていただけませんか。"
             template_mapping["extension3_jp"] = "お願いなんだけれど、このデータの作成を手伝ってくれない？"
@@ -123,9 +130,9 @@ for level in levels:
             template_filled = template_string.safe_substitute(template_mapping)
             html = HTML(string=template_filled)
 
-            # The numbers used in the filename need to be zero filled
+            # The numbers used in the filename DO NOT need to be zero filled
             f_level = str(level)
-            f_unit = str(unit).zfill(2)
-            f_lesson = str(lesson).zfill(2)
+            f_unit = str(unit)
+            f_lesson = str(lesson)
 
             html.write_pdf(f'{output_path}EB{f_level}U{f_unit}L{f_lesson}.pdf')
