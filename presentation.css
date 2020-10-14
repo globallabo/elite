@@ -119,16 +119,19 @@ footer .logo-text {
 }
 
 .substitutions-page .substitutions {
-  font-size: 20pt;
-  margin-top: 3em;
-  margin-left: 6em;
+  font-size: 30pt;
+  margin-top: 1em;
+  margin-left: 3em;
 }
 .substitutions-page .substitutions .vocab-list li {
-  float: left;
-  margin-right: 3em;
+  /* float: left;
+  margin-right: 3em; */
+  margin-bottom: 1.3em;
 }
 .substitutions-page .substitutions .vocab-list .vocab-jp {
-  font-size: 13.5pt;
+  font-size: 19pt;
+  margin-top: -1.7em;
+  margin-bottom: 0.7em;
 }
 
 .vocab-page .vocab {
