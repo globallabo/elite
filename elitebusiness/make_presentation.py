@@ -32,7 +32,7 @@ for level in levels:
         css_string = css_file.read()
 
     # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
-    output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/EliteBusiness/test-output/Level {level}/'
+    output_path = f'/Users/cbunn/projects/elitebusiness/output/Level {level}/'
 
     # Fetch data from Google Sheet
     scope = ["https://spreadsheets.google.com/feeds",
