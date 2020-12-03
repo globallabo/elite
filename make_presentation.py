@@ -11,10 +11,10 @@ logger.addHandler(logging.FileHandler('/tmp/weasyprint.log'))
 
 # There are 4 levels
 # levels = [1, 2, 3, 4]
-levels = [1]
+levels = [2]
 # There are 6 units per level
 # units = [1, 2, 3, 4, 5, 6]
-units = [6]
+units = [1]
 # There are 4 lessons per unit, but the last is a review unit with no materials
 # lessons = [1, 2, 3]
 lessons = [3]
