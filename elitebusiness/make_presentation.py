@@ -16,14 +16,14 @@ levels = [2]
 # units = [1, 2, 3, 4, 5, 6]
 units = [1]
 # There are 4 lessons per unit, but the last is a review unit with no materials
-# lessons = [1, 2, 3]
-lessons = [3]
+lessons = [1, 2, 3]
+# lessons = [3]
 
 for level in levels:
     print(f'Level {level}')
     # Create HTML template
     font_config = FontConfiguration()
-    template_filename = f'EB{level}-presentation-template.html'
+    template_filename = 'EB-presentation-template.html'
     with open(template_filename, "r") as template_file:
         template_file_contents = template_file.read()
     template_string = Template(template_file_contents)
