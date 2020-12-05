@@ -110,8 +110,7 @@ footer .logo-text {
 
 .dialogue-page .dialogue {
   font-size: 30pt;
-  margin-top: 1em;
-  margin-left: 1.5em;
+  margin: 1em 2em 0 1.5em;
 }
 .dialogue-page .dialogue-en {
   margin-bottom: 1.5em;
@@ -139,8 +138,7 @@ footer .logo-text {
 
 .substitutions-page .substitutions {
   font-size: 30pt;
-  margin-top: 1em;
-  margin-left: 3em;
+  margin: 1em 2em 0 3em;
 }
 .substitutions-page .substitutions .vocab-list li {
   /* float: left;
@@ -155,8 +153,7 @@ footer .logo-text {
 
 .vocab-page .vocab {
   font-size: 30pt;
-  margin-top: 1em;
-  margin-left: 3em;
+  margin: 1em 2em 0 3em;
 }
 .vocab-page .vocab .vocab-list {
 }
@@ -166,8 +163,7 @@ footer .logo-text {
 
 .extensions-page .extensions {
   font-size: 30pt;
-  margin-top: 1em;
-  margin-left: 3em;
+  margin: 1em 2em 0 3em;
 }
 .extensions-page .extensions .extensions-list li {
   margin-bottom: 2em;
