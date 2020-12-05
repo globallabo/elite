@@ -15,9 +15,21 @@
   font-family: 'MPLUS1p-Bold';
   src: url('../fonts/MPLUS1p-Bold.ttf')  format('truetype');
 }
+@font-face {
+  font-family: "NotoSansJP-Regular";
+  src: url('../fonts/NotoSansJP-Regular.otf')  format("opentype");
+}
+@font-face {
+  font-family: "NotoSansJP-Medium";
+  src: url('../fonts/NotoSansJP-Medium.otf')  format("opentype");
+}
+@font-face {
+  font-family: "NotoSansJP-Bold";
+  src: url('../fonts/NotoSansJP-Bold.otf')  format("opentype");
+}
 
 body {
-  font-family: 'MPLUS1p-Regular';
+  font-family: 'NotoSansJP-Regular';
   color: #666666;
 }
 .a-label {
