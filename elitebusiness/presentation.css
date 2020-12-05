@@ -30,6 +30,11 @@ body {
   /* color: #E69138; */
 }
 
+p {
+  text-indent: -2em;
+  padding-left: 2em;
+}
+
 section {
   page-break-after: always;
   page-break-inside: avoid;

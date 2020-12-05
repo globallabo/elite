@@ -41,7 +41,7 @@ for level in levels:
              "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
     client = gspread.authorize(creds)
-    sheet = client.open("ビジネス英語研修_online_対訳付き").worksheet(f"level_{level}")
+    sheet = client.open("Copy of ビジネス英語研修_online_対訳付き").worksheet(f"level_{level}")
     data = sheet.get_all_values()
     # col = sheet.col_values(3)
     # cell = sheet.cell(2, 2).value
@@ -75,10 +75,10 @@ for level in levels:
             template_mapping["dialogue_b1_en"] = data[row + 1][column + 4]
             template_mapping["dialogue_a2_en"] = data[row + 2][column + 4]
             template_mapping["dialogue_b2_en"] = data[row + 3][column + 4]
-            template_mapping["dialogue_a1_jp"] = "悩んでいるみたいですね。"
-            template_mapping["dialogue_b1_jp"] = "そうなんですよ。このデータの作成手伝ってくれませんか。"
-            template_mapping["dialogue_a2_jp"] = "もちろんです。どうしましたか。"
-            template_mapping["dialogue_b2_jp"] = "どうしても（データが）合わないんですよ。"
+            template_mapping["dialogue_a1_jp"] = data[row][column + 5]
+            template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
+            template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
+            template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
             # template_mapping["dialogue_a1_jp"] = data[row][column + 5]
             # template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
             # template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
@@ -89,16 +89,16 @@ for level in levels:
             template_mapping["vocab2_en"] = data[row + 1][column + 8]
             template_mapping["vocab3_en"] = data[row + 2][column + 8]
             template_mapping["vocab4_en"] = data[row + 3][column + 8]
-            template_mapping["vocab1_jp"] = "データ"
-            template_mapping["vocab2_jp"] = "報告書"
-            template_mapping["vocab3_jp"] = "図式"
-            template_mapping["vocab4_jp"] = "プレゼンテーション"
-            template_mapping["extension1_en"] = data[row][column + 11]
-            template_mapping["extension2_en"] = data[row + 1][column + 11]
-            template_mapping["extension3_en"] = data[row + 2][column + 11]
-            template_mapping["extension1_jp"] = "このデータの作成を手伝ってくれませんか。"
-            template_mapping["extension2_jp"] = "こちらのデータの作成を手伝っていただけませんか。"
-            template_mapping["extension3_jp"] = "お願いなんだけれど、このデータの作成を手伝ってくれない？"
+            template_mapping["vocab1_jp"] = data[row][column + 9]
+            template_mapping["vocab2_jp"] = data[row + 1][column + 9]
+            template_mapping["vocab3_jp"] = data[row + 2][column + 9]
+            template_mapping["vocab4_jp"] = data[row + 3][column + 9]
+            template_mapping["extension1_en"] = data[row][column + 10]
+            template_mapping["extension2_en"] = data[row + 1][column + 10]
+            template_mapping["extension3_en"] = data[row + 2][column + 10]
+            template_mapping["extension1_jp"] = data[row][column + 11]
+            template_mapping["extension2_jp"] = data[row + 1][column + 11]
+            template_mapping["extension3_jp"] = data[row + 2][column + 11]
 
             # template_mapping["unit_title"] = "Asking for help"
             # template_mapping["dialogue_a1_en"] = "You look stressed."
