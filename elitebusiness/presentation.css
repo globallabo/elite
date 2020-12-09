@@ -43,11 +43,6 @@ body {
   color: #E06666;
 }
 
-p {
-  text-indent: -2em;
-  padding-left: 2em;
-}
-
 section {
   page-break-after: always;
   page-break-inside: avoid;
@@ -129,11 +124,19 @@ footer .logo-text {
 /* target is used on both target-page and substitutions-page */
 .target {
   font-size: 30pt;
-  margin-top: 1em;
-  margin-left: 1.5em;
+  margin: 1em 2em 0 1.5em;
 }
 .target-en {
   margin-bottom: 1.5em;
+}
+
+/* Wrap text that has A/B, but align with the sentences, not the labels */
+.dialogue-en, .target-en {
+  text-indent: -1.8em;
+  padding-left: 1.8em;
+}
+.dialogue-en, .target-en, .extension-en {
+  line-height: 1.2;
 }
 
 .substitutions-page .substitutions {
