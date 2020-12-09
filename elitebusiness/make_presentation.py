@@ -79,10 +79,6 @@ for level in levels:
             template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
             template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
             template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
-            # template_mapping["dialogue_a1_jp"] = data[row][column + 5]
-            # template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
-            # template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
-            # template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
             template_mapping["target_a_en"] = data[row][column + 7]
             template_mapping["target_b_en"] = data[row + 1][column + 7]
             template_mapping["vocab1_en"] = data[row][column + 8]
@@ -99,32 +95,6 @@ for level in levels:
             template_mapping["extension1_jp"] = data[row][column + 11]
             template_mapping["extension2_jp"] = data[row + 1][column + 11]
             template_mapping["extension3_jp"] = data[row + 2][column + 11]
-
-            # template_mapping["unit_title"] = "Asking for help"
-            # template_mapping["dialogue_a1_en"] = "You look stressed."
-            # template_mapping["dialogue_b1_en"] = "Yeah, I am. Can you help me with this data?"
-            # template_mapping["dialogue_a2_en"] = "Of course. What's the problem?"
-            # template_mapping["dialogue_b2_en"] = "It just doesn't add up."
-            # template_mapping["dialogue_a1_jp"] = "悩んでいるみたいですね。"
-            # template_mapping["dialogue_b1_jp"] = "そうなんですよ。このデータの作成手伝ってくれませんか。"
-            # template_mapping["dialogue_a2_jp"] = "もちろんです。どうしましたか。"
-            # template_mapping["dialogue_b2_jp"] = "どうしても（データが）合わないんですよ。"
-            # template_mapping["target_a_en"] = "Can you help me with this <u>data</u>?"
-            # template_mapping["target_b_en"] = "Of course."
-            # template_mapping["vocab1_en"] = "data"
-            # template_mapping["vocab2_en"] = "report"
-            # template_mapping["vocab3_en"] = "schematic"
-            # template_mapping["vocab4_en"] = "presentation"
-            # template_mapping["vocab1_jp"] = "データ"
-            # template_mapping["vocab2_jp"] = "報告書"
-            # template_mapping["vocab3_jp"] = "図式"
-            # template_mapping["vocab4_jp"] = "プレゼンテーション"
-            # template_mapping["extension1_en"] = "Can you give me a hand with this <u>data</u>?"
-            # template_mapping["extension2_en"] = "Would you mind helping me with this <u>data</u>?"
-            # template_mapping["extension3_en"] = "Would you be a dear and help me with this <u>data</u>?"
-            # template_mapping["extension1_jp"] = "このデータの作成を手伝ってくれませんか。"
-            # template_mapping["extension2_jp"] = "こちらのデータの作成を手伝っていただけませんか。"
-            # template_mapping["extension3_jp"] = "お願いなんだけれど、このデータの作成を手伝ってくれない？"
 
             # Substitute
             template_filled = template_string.safe_substitute(template_mapping)
