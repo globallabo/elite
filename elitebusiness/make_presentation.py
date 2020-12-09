@@ -4,6 +4,17 @@ from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
 from string import Template
 import logging
+from typing import List
+
+
+def underline_vocab(target: str, vocabs: List[str]) -> str:
+    for vocab in vocabs:
+        if vocab in target:
+            uvocab = f"<u>{vocab}</u>"
+            newtarget = target.replace(vocab, uvocab)
+            return newtarget
+    return target
+
 
 # Log WeasyPrint output
 logger = logging.getLogger('weasyprint')
@@ -79,8 +90,14 @@ for level in levels:
             template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
             template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
             template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
-            template_mapping["target_a_en"] = data[row][column + 7]
-            template_mapping["target_b_en"] = data[row + 1][column + 7]
+            target_a_en = data[row][column + 7]
+            target_b_en = data[row + 1][column + 7]
+            vocab1_en = data[row][column + 8]
+            vocab2_en = data[row + 1][column + 8]
+            vocab3_en = data[row + 2][column + 8]
+            vocab4_en = data[row + 3][column + 8]
+            template_mapping["target_a_en"] = underline_vocab(target_a_en, [vocab1_en, vocab2_en, vocab3_en, vocab4_en])
+            template_mapping["target_b_en"] = underline_vocab(target_b_en, [vocab1_en, vocab2_en, vocab3_en, vocab4_en])
             template_mapping["vocab1_en"] = data[row][column + 8]
             template_mapping["vocab2_en"] = data[row + 1][column + 8]
             template_mapping["vocab3_en"] = data[row + 2][column + 8]
