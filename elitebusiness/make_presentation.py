@@ -16,6 +16,25 @@ def underline_vocab(target: str, vocabs: List[str]) -> str:
     return target
 
 
+# Function to get data from google Sheet
+def get_data_for_level(level: str) -> List:
+    # Fetch data from Google Sheet
+    scope = ["https://spreadsheets.google.com/feeds",
+             "https://www.googleapis.com/auth/spreadsheets",
+             "https://www.googleapis.com/auth/drive.file",
+             "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("Copy of ビジネス英語研修_online_対訳付き").worksheet(f"level_{level}")
+    return sheet.get_all_values()
+
+
+# Function to create template mapping
+
+# Function to open HTML template file and substitute vars
+
+# Function to output PDF
+
 # Log WeasyPrint output
 logger = logging.getLogger('weasyprint')
 logger.addHandler(logging.FileHandler('/tmp/weasyprint.log'))
@@ -45,15 +64,8 @@ for level in levels:
     # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
     output_path = f'/Users/cbunn/projects/elitebusiness/output/Level {level}/'
 
-    # Fetch data from Google Sheet
-    scope = ["https://spreadsheets.google.com/feeds",
-             "https://www.googleapis.com/auth/spreadsheets",
-             "https://www.googleapis.com/auth/drive.file",
-             "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
-    client = gspread.authorize(creds)
-    sheet = client.open("Copy of ビジネス英語研修_online_対訳付き").worksheet(f"level_{level}")
-    data = sheet.get_all_values()
+    data = get_data_for_level(level)
+
     # col = sheet.col_values(3)
     # cell = sheet.cell(2, 2).value
     # print("Column 3:")
