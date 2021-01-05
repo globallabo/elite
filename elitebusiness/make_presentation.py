@@ -38,7 +38,6 @@ def create_template_mapping(data: list, level: int, unit: int, lesson: int) -> d
     # Unit titles are only listed next to the first lesson, so
     #  we need a special variable for that
     unit_row = 1 + ((unit - 1) * 13)
-
     # Create substitution mapping
     template_mapping = dict()
     template_mapping["level"] = level
@@ -78,7 +77,6 @@ def create_template_mapping(data: list, level: int, unit: int, lesson: int) -> d
     template_mapping["extension1_jp"] = data[row][column + 11]
     template_mapping["extension2_jp"] = data[row + 1][column + 11]
     template_mapping["extension3_jp"] = data[row + 2][column + 11]
-
     return template_mapping
 
 
@@ -96,10 +94,15 @@ def fill_template(template: str, template_mapping: dict[str, str]) -> str:
 
 
 # Function to output PDF
+def output_pdf(contents: str, filename: str):
+    # Log WeasyPrint output
+    logger = logging.getLogger('weasyprint')
+    logger.addHandler(logging.FileHandler('/tmp/weasyprint.log'))
+    # Create Weasyprint HTML object
+    html = HTML(string=contents)
+    # Output PDF via Weasyprint
+    html.write_pdf(filename)
 
-# Log WeasyPrint output
-logger = logging.getLogger('weasyprint')
-logger.addHandler(logging.FileHandler('/tmp/weasyprint.log'))
 
 # There are 4 levels
 # levels = [1, 2, 3, 4]
@@ -117,22 +120,8 @@ output_path = '/Users/cbunn/projects/elitebusiness/output/'
 
 for level in levels:
     print(f'Level {level}')
-    # Create HTML template
-    # font_config = FontConfiguration()
-    #
-    # css_filename = "presentation.css"
-    # with open(css_filename, "r") as css_file:
-    #     css_string = css_file.read()
-
 
     data = get_data_for_level(level)
-
-    # col = sheet.col_values(3)
-    # cell = sheet.cell(2, 2).value
-    # print("Column 3:")
-    # print(col)
-    # print("Cell 2,2:")
-    # print(cell)
 
     # Loop through all Units and Lessons
     for unit in units:
@@ -140,16 +129,9 @@ for level in levels:
             # create mapping dict
             template_mapping = create_template_mapping(data=data, level=level, unit=unit, lesson=lesson)
             # Get contents of HTML template file
-            template_file_contents = get_template(template_filename)
+            template_file_contents = get_template(filename=template_filename)
             # Substitute
-            template_filled = fill_template(template_file_contents, template_mapping)
-            # Create Weasyprint HTML
-            html = HTML(string=template_filled)
-
-            # The numbers used in the filename DO NOT need to be zero filled
-            f_level = str(level)
-            f_unit = str(unit)
-            f_lesson = str(lesson)
-
-            # Output PDF via Weasyprint
-            html.write_pdf(f'{output_path}/Level {level}/EB{f_level}U{f_unit}L{f_lesson}.pdf')
+            template_filled = fill_template(template=template_file_contents, template_mapping=template_mapping)
+            # Output PDF
+            filename = f'{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf'
+            output_pdf(contents=template_filled, filename=filename)
