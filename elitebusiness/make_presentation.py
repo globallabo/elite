@@ -4,10 +4,10 @@ from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
 from string import Template
 import logging
-from typing import List
+# from typing import List
 
 
-def underline_vocab(target: str, vocabs: List[str]) -> str:
+def underline_vocab(target: str, vocabs: list[str]) -> str:
     for vocab in vocabs:
         if vocab in target:
             uvocab = f"<u>{vocab}</u>"
@@ -16,8 +16,8 @@ def underline_vocab(target: str, vocabs: List[str]) -> str:
     return target
 
 
-# Function to get data from google Sheet
-def get_data_for_level(level: str) -> List:
+# Function to get data from google Sheet (one level at a time)
+def get_data_for_level(level: str) -> list[str]:
     # Fetch data from Google Sheet
     scope = ["https://spreadsheets.google.com/feeds",
              "https://www.googleapis.com/auth/spreadsheets",
@@ -29,7 +29,59 @@ def get_data_for_level(level: str) -> List:
     return sheet.get_all_values()
 
 
-# Function to create template mapping
+# Function to create template mapping for one lesson at a time
+def create_template_mapping(data: list, level: int, unit: int, lesson: int) -> dict[str, str]:
+    # Set the row based on the unit and lesson, column to 1
+    # *NOTE* Google Sheets and gspread start numbering of rows
+    #  and columns at 1, while the Python dict begins at 0,0
+    row = 1 + ((unit - 1) * 13) + ((lesson - 1) * 4)
+    column = 1
+    # Unit titles are only listed next to the first lesson, so
+    #  we need a special variable for that
+    unit_row = 1 + ((unit - 1) * 13)
+
+    # Create substitution mapping
+    template_mapping = dict()
+    template_mapping["level"] = level
+    # These are used for the page header
+    template_mapping["unit"] = unit
+    template_mapping["lesson"] = lesson
+    print(f'Level: {level}, Unit: {unit}, Lesson: {lesson}')
+    template_mapping["unit_title"] = data[unit_row][column]
+    template_mapping["lesson_title"] = data[row][column + 1]
+    template_mapping["dialogue_a1_en"] = data[row][column + 4]
+    template_mapping["dialogue_b1_en"] = data[row + 1][column + 4]
+    template_mapping["dialogue_a2_en"] = data[row + 2][column + 4]
+    template_mapping["dialogue_b2_en"] = data[row + 3][column + 4]
+    template_mapping["dialogue_a1_jp"] = data[row][column + 5]
+    template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
+    template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
+    template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
+    target_a_en = data[row][column + 7]
+    target_b_en = data[row + 1][column + 7]
+    vocab1_en = data[row][column + 8]
+    vocab2_en = data[row + 1][column + 8]
+    vocab3_en = data[row + 2][column + 8]
+    vocab4_en = data[row + 3][column + 8]
+    template_mapping["target_a_en"] = underline_vocab(target_a_en, [vocab1_en, vocab2_en, vocab3_en, vocab4_en])
+    template_mapping["target_b_en"] = underline_vocab(target_b_en, [vocab1_en, vocab2_en, vocab3_en, vocab4_en])
+    template_mapping["vocab1_en"] = data[row][column + 8]
+    template_mapping["vocab2_en"] = data[row + 1][column + 8]
+    template_mapping["vocab3_en"] = data[row + 2][column + 8]
+    template_mapping["vocab4_en"] = data[row + 3][column + 8]
+    template_mapping["vocab1_jp"] = data[row][column + 9]
+    template_mapping["vocab2_jp"] = data[row + 1][column + 9]
+    template_mapping["vocab3_jp"] = data[row + 2][column + 9]
+    template_mapping["vocab4_jp"] = data[row + 3][column + 9]
+    template_mapping["extension1_en"] = data[row][column + 10]
+    template_mapping["extension2_en"] = data[row + 1][column + 10]
+    template_mapping["extension3_en"] = data[row + 2][column + 10]
+    template_mapping["extension1_jp"] = data[row][column + 11]
+    template_mapping["extension2_jp"] = data[row + 1][column + 11]
+    template_mapping["extension3_jp"] = data[row + 2][column + 11]
+
+    return template_mapping
+
 
 # Function to open HTML template file and substitute vars
 
@@ -76,54 +128,7 @@ for level in levels:
     # Loop through all Units and Lessons
     for unit in units:
         for lesson in lessons:
-            # Set the row based on the unit and lesson, column to 1
-            # *NOTE* Google Sheets and gspread start numbering of rows
-            #  and columns at 1, while the Python dict begins at 0,0
-            row = 1 + ((unit - 1) * 13) + ((lesson - 1) * 4)
-            column = 1
-            # Unit titles are only listed next to the first lesson, so
-            #  we need a special variable for that
-            unit_row = 1 + ((unit - 1) * 13)
-
-            # Create substitution mapping
-            template_mapping = dict()
-            template_mapping["level"] = level
-            # These are used for the page header
-            template_mapping["unit"] = unit
-            template_mapping["lesson"] = lesson
-            print(f'Level: {level}, Unit: {unit}, Lesson: {lesson}')
-            template_mapping["unit_title"] = data[unit_row][column]
-            template_mapping["lesson_title"] = data[row][column + 1]
-            template_mapping["dialogue_a1_en"] = data[row][column + 4]
-            template_mapping["dialogue_b1_en"] = data[row + 1][column + 4]
-            template_mapping["dialogue_a2_en"] = data[row + 2][column + 4]
-            template_mapping["dialogue_b2_en"] = data[row + 3][column + 4]
-            template_mapping["dialogue_a1_jp"] = data[row][column + 5]
-            template_mapping["dialogue_b1_jp"] = data[row + 1][column + 5]
-            template_mapping["dialogue_a2_jp"] = data[row + 2][column + 5]
-            template_mapping["dialogue_b2_jp"] = data[row + 3][column + 5]
-            target_a_en = data[row][column + 7]
-            target_b_en = data[row + 1][column + 7]
-            vocab1_en = data[row][column + 8]
-            vocab2_en = data[row + 1][column + 8]
-            vocab3_en = data[row + 2][column + 8]
-            vocab4_en = data[row + 3][column + 8]
-            template_mapping["target_a_en"] = underline_vocab(target_a_en, [vocab1_en, vocab2_en, vocab3_en, vocab4_en])
-            template_mapping["target_b_en"] = underline_vocab(target_b_en, [vocab1_en, vocab2_en, vocab3_en, vocab4_en])
-            template_mapping["vocab1_en"] = data[row][column + 8]
-            template_mapping["vocab2_en"] = data[row + 1][column + 8]
-            template_mapping["vocab3_en"] = data[row + 2][column + 8]
-            template_mapping["vocab4_en"] = data[row + 3][column + 8]
-            template_mapping["vocab1_jp"] = data[row][column + 9]
-            template_mapping["vocab2_jp"] = data[row + 1][column + 9]
-            template_mapping["vocab3_jp"] = data[row + 2][column + 9]
-            template_mapping["vocab4_jp"] = data[row + 3][column + 9]
-            template_mapping["extension1_en"] = data[row][column + 10]
-            template_mapping["extension2_en"] = data[row + 1][column + 10]
-            template_mapping["extension3_en"] = data[row + 2][column + 10]
-            template_mapping["extension1_jp"] = data[row][column + 11]
-            template_mapping["extension2_jp"] = data[row + 1][column + 11]
-            template_mapping["extension3_jp"] = data[row + 2][column + 11]
+            template_mapping = create_template_mapping(data=data, level=level, unit=unit, lesson=lesson)
 
             # Substitute
             template_filled = template_string.safe_substitute(template_mapping)
