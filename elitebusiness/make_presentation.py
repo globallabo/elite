@@ -4,7 +4,6 @@ from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
 from string import Template
 import logging
-# from typing import List
 
 
 def underline_vocab(target: str, vocabs: list[str]) -> str:
@@ -83,7 +82,18 @@ def create_template_mapping(data: list, level: int, unit: int, lesson: int) -> d
     return template_mapping
 
 
-# Function to open HTML template file and substitute vars
+# Function to open HTML template file and return contents as string
+def get_template(filename: str) -> str:
+    with open(filename, "r") as template_file:
+        template_file_contents = template_file.read()
+    return template_file_contents
+
+
+# Function to substitute vars in template string
+def fill_template(template: str, template_mapping: dict[str, str]) -> str:
+    template_string = Template(template)
+    return template_string.safe_substitute(template_mapping)
+
 
 # Function to output PDF
 
@@ -100,21 +110,20 @@ units = [1]
 # There are 4 lessons per unit, but the last is a review unit with no materials
 lessons = [1, 2, 3]
 # lessons = [3]
+# Filename for HTML Template
+template_filename = 'EB-presentation-template.html'
+# output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
+output_path = '/Users/cbunn/projects/elitebusiness/output/'
 
 for level in levels:
     print(f'Level {level}')
     # Create HTML template
-    font_config = FontConfiguration()
-    template_filename = 'EB-presentation-template.html'
-    with open(template_filename, "r") as template_file:
-        template_file_contents = template_file.read()
-    template_string = Template(template_file_contents)
-    css_filename = "presentation.css"
-    with open(css_filename, "r") as css_file:
-        css_string = css_file.read()
+    # font_config = FontConfiguration()
+    #
+    # css_filename = "presentation.css"
+    # with open(css_filename, "r") as css_file:
+    #     css_string = css_file.read()
 
-    # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
-    output_path = f'/Users/cbunn/projects/elitebusiness/output/Level {level}/'
 
     data = get_data_for_level(level)
 
@@ -128,10 +137,13 @@ for level in levels:
     # Loop through all Units and Lessons
     for unit in units:
         for lesson in lessons:
+            # create mapping dict
             template_mapping = create_template_mapping(data=data, level=level, unit=unit, lesson=lesson)
-
+            # Get contents of HTML template file
+            template_file_contents = get_template(template_filename)
             # Substitute
-            template_filled = template_string.safe_substitute(template_mapping)
+            template_filled = fill_template(template_file_contents, template_mapping)
+            # Create Weasyprint HTML
             html = HTML(string=template_filled)
 
             # The numbers used in the filename DO NOT need to be zero filled
@@ -139,4 +151,5 @@ for level in levels:
             f_unit = str(unit)
             f_lesson = str(lesson)
 
-            html.write_pdf(f'{output_path}EB{f_level}U{f_unit}L{f_lesson}.pdf')
+            # Output PDF via Weasyprint
+            html.write_pdf(f'{output_path}/Level {level}/EB{f_level}U{f_unit}L{f_lesson}.pdf')
