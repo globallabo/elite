@@ -6,6 +6,7 @@ from string import Template
 import logging
 
 
+# Find vocabulary in target sentence and underline it
 def underline_vocab(target: str, vocabs: list[str]) -> str:
     for vocab in vocabs:
         if vocab in target:
@@ -15,7 +16,7 @@ def underline_vocab(target: str, vocabs: list[str]) -> str:
     return target
 
 
-# Function to get data from google Sheet (one level at a time)
+# Get data from google Sheet (one level at a time)
 def get_data_for_level(level: str) -> list[str]:
     # Fetch data from Google Sheet
     scope = ["https://spreadsheets.google.com/feeds",
@@ -28,7 +29,7 @@ def get_data_for_level(level: str) -> list[str]:
     return sheet.get_all_values()
 
 
-# Function to create template mapping for one lesson at a time
+# Create template mapping for one lesson at a time
 def create_template_mapping(data: list, level: int, unit: int, lesson: int) -> dict[str, str]:
     # Set the row based on the unit and lesson, column to 1
     # *NOTE* Google Sheets and gspread start numbering of rows
@@ -80,20 +81,20 @@ def create_template_mapping(data: list, level: int, unit: int, lesson: int) -> d
     return template_mapping
 
 
-# Function to open HTML template file and return contents as string
+# Open HTML template file and return contents as string
 def get_template(filename: str) -> str:
     with open(filename, "r") as template_file:
         template_file_contents = template_file.read()
     return template_file_contents
 
 
-# Function to substitute vars in template string
+# Substitute vars in template string
 def fill_template(template: str, template_mapping: dict[str, str]) -> str:
     template_string = Template(template)
     return template_string.safe_substitute(template_mapping)
 
 
-# Function to output PDF
+# Output PDF
 def output_pdf(contents: str, filename: str):
     # Log WeasyPrint output
     logger = logging.getLogger('weasyprint')
@@ -106,10 +107,10 @@ def output_pdf(contents: str, filename: str):
 
 # There are 4 levels
 # levels = [1, 2, 3, 4]
-levels = [2]
+levels = [1, 2, 3]
 # There are 6 units per level
 # units = [1, 2, 3, 4, 5, 6]
-units = [1]
+units = [2]
 # There are 4 lessons per unit, but the last is a review unit with no materials
 lessons = [1, 2, 3]
 # lessons = [3]
@@ -133,5 +134,5 @@ for level in levels:
             # Substitute
             template_filled = fill_template(template=template_file_contents, template_mapping=template_mapping)
             # Output PDF
-            filename = f'{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf'
-            output_pdf(contents=template_filled, filename=filename)
+            output_filename = f'{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf'
+            output_pdf(contents=template_filled, filename=output_filename)
