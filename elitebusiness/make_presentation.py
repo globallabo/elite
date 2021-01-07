@@ -105,34 +105,44 @@ def output_pdf(contents: str, filename: str):
     html.write_pdf(filename)
 
 
-# There are 4 levels
-# levels = [1, 2, 3, 4]
-levels = [1, 2, 3]
-# There are 6 units per level
-# units = [1, 2, 3, 4, 5, 6]
-units = [2]
-# There are 4 lessons per unit, but the last is a review unit with no materials
-lessons = [1, 2, 3]
-# lessons = [3]
-# Filename for HTML Template
-template_filename = 'EB-presentation-template.html'
-# output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
-output_path = '/Users/cbunn/projects/elitebusiness/output/'
+def main(levels: list,
+         units: list,
+         lessons: list,
+         template_filename: str = 'EB-presentation-template.html',
+         output_path: str = '/Users/cbunn/projects/elitebusiness/output/'):
+    for level in levels:
+        print(f'Level {level}')
+        # Get data from Google Sheet
+        data = get_data_for_level(level)
+        # Loop through all Units and Lessons
+        for unit in units:
+            for lesson in lessons:
+                # create mapping dict
+                template_mapping = create_template_mapping(data=data, level=level, unit=unit, lesson=lesson)
+                # Get contents of HTML template file
+                template_file_contents = get_template(filename=template_filename)
+                # Substitute
+                template_filled = fill_template(template=template_file_contents, template_mapping=template_mapping)
+                # Output PDF
+                output_filename = f'{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf'
+                output_pdf(contents=template_filled, filename=output_filename)
 
-for level in levels:
-    print(f'Level {level}')
 
-    data = get_data_for_level(level)
-
-    # Loop through all Units and Lessons
-    for unit in units:
-        for lesson in lessons:
-            # create mapping dict
-            template_mapping = create_template_mapping(data=data, level=level, unit=unit, lesson=lesson)
-            # Get contents of HTML template file
-            template_file_contents = get_template(filename=template_filename)
-            # Substitute
-            template_filled = fill_template(template=template_file_contents, template_mapping=template_mapping)
-            # Output PDF
-            output_filename = f'{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf'
-            output_pdf(contents=template_filled, filename=output_filename)
+# # There are 4 levels
+# # levels = [1, 2, 3, 4]
+# levels = [1, 2, 3]
+# # There are 6 units per level
+# # units = [1, 2, 3, 4, 5, 6]
+# units = [2]
+# # There are 4 lessons per unit, but the last is a review unit with no materials
+# lessons = [1, 2, 3]
+# # lessons = [3]
+# # Filename for HTML Template
+# template_filename = 'EB-presentation-template.html'
+# # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
+# output_path = '/Users/cbunn/projects/elitebusiness/output/'
+if __name__ == "__main__":
+    levels = [1, 2, 3]
+    units = [2]
+    lessons = [1, 2, 3]
+    main(levels, units, lessons)
