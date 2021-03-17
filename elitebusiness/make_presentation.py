@@ -1,7 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from weasyprint import HTML, CSS
-from weasyprint.fonts import FontConfiguration
+from weasyprint import HTML
 from string import Template
 import logging
 
@@ -109,7 +108,7 @@ def main(levels: list,
          units: list,
          lessons: list,
          template_filename: str = 'EB-presentation-template.html',
-         output_path: str = '/Users/cbunn/projects/elitebusiness/output/'):
+         output_path: str = '/mnt/c/Users/chris/projects/elitebusiness/output/'):
     for level in levels:
         print(f'Level {level}')
         # Get data from Google Sheet
@@ -142,7 +141,11 @@ def main(levels: list,
 # # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
 # output_path = '/Users/cbunn/projects/elitebusiness/output/'
 if __name__ == "__main__":
-    levels = [1, 2, 3]
-    units = [2]
+    # There are 4 levels, but level 4 isn't ready
+    # levels = [1, 2, 3]
+    # units = [1, 2, 3, 4, 5, 6]
+    # lessons = [1, 2, 3]
+    levels = [2]
+    units = [4]
     lessons = [1, 2, 3]
     main(levels, units, lessons)
