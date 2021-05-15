@@ -2,6 +2,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from weasyprint import HTML
 from string import Template
+import pathlib
 import logging
 
 
@@ -117,7 +118,7 @@ def main(
     units: list,
     lessons: list,
     template_filename: str = "EB-presentation-template.html",
-    output_path: str = "/mnt/c/Users/chris/projects/elitebusiness/output/",
+    output_path: str = pathlib.Path(__file__).parent.parent.absolute() / "output/",
 ):
     for level in levels:
         print(f"Level {level}")
@@ -136,6 +137,9 @@ def main(
                 template_filled = fill_template(
                     template=template_file_contents, template_mapping=template_mapping
                 )
+                # Create final path if it doesn't exist
+                pathlib.Path(f"{output_path}/Level {level}/").mkdir(parents=True, exist_ok=True)
+                print(f"Output path: {output_path}/Level {level}/")
                 # Output PDF
                 output_filename = (
                     f"{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf"
