@@ -4,6 +4,7 @@ from weasyprint import HTML
 from string import Template
 import pathlib
 import logging
+import jinja2
 
 
 # Find vocabulary in target sentence and underline it
@@ -102,6 +103,15 @@ def fill_template(template: str, template_mapping: dict[str, str]) -> str:
     return template_string.safe_substitute(template_mapping)
 
 
+# Use Jinja to render a template into HTML
+def render_template(template_mapping: dict[str, str]) -> str:
+    template_loader = jinja2.FileSystemLoader(searchpath="./templates/")
+    template_env = jinja2.Environment(loader=template_loader)
+    TEMPLATE_FILE = "base.html"
+    template = template_env.get_template(TEMPLATE_FILE)
+    output_text = template.render(template_mapping)
+    return output_text
+
 # Output PDF
 def output_pdf(contents: str, filename: str):
     # Log WeasyPrint output
@@ -131,12 +141,13 @@ def main(
                 template_mapping = create_template_mapping(
                     data=data, level=level, unit=unit, lesson=lesson
                 )
-                # Get contents of HTML template file
-                template_file_contents = get_template(filename=template_filename)
-                # Substitute
-                template_filled = fill_template(
-                    template=template_file_contents, template_mapping=template_mapping
-                )
+                # # Get contents of HTML template file
+                # template_file_contents = get_template(filename=template_filename)
+                # # Substitute
+                # template_filled = fill_template(
+                #     template=template_file_contents, template_mapping=template_mapping
+                # )
+                template_filled = render_template(template_mapping)
                 # Create final path if it doesn't exist
                 pathlib.Path(f"{output_path}/Level {level}/").mkdir(parents=True, exist_ok=True)
                 print(f"Output path: {output_path}/Level {level}/")
