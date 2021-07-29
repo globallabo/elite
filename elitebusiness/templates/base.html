@@ -15,34 +15,17 @@
 
   <body>
     <section class="image-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">1</span>
-        </div>
-      </header>
+      {% set page = 1 %} {% include "page-header.html" %}
 
       <div class="main-image">
         <img src="images/EB{{ level }}U{{ unit }}L{{ lesson }}.jpg" alt="" />
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="dialogue-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">2</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="dialogue">
         <p class="dialogue-en">
@@ -59,21 +42,11 @@
         </p>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="dialogue-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">3</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="dialogue">
         <p class="dialogue-en">
@@ -94,42 +67,22 @@
         <p class="dialogue-jp jp-text">{{ dialogue_b2_jp }}</p>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="target-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">4</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="target">
         <p class="target-en"><span class="a-label">A</span>{{ target_a_en }}</p>
         <p class="target-en"><span class="b-label">B</span>{{ target_b_en }}</p>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="substitutions-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">5</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="target">
         <p class="target-en"><span class="a-label">A</span>{{ target_a_en }}</p>
@@ -144,21 +97,11 @@
         </ol>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="substitutions-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">6</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="target">
         <p class="target-en"><span class="a-label">A</span>{{ target_a_en }}</p>
@@ -177,21 +120,11 @@
         </ol>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="vocab-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">7</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="vocab">
         <ol class="vocab-list">
@@ -202,21 +135,11 @@
         </ol>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="extensions-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">8</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="extensions">
         <ol class="extensions-list">
@@ -226,21 +149,11 @@
         </ol>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
 
     <section class="extensions-page">
-      <header>
-        <div class="label">
-          <span class="level">Level {{ level }}</span>
-          <span class="unit">{{ unit_title }}</span>
-          <span class="lesson">Lesson {{ lesson }}</span>
-          <span class="page-number">9</span>
-        </div>
-      </header>
+      {% set page = page + 1 %} {% include "page-header.html" %}
 
       <div class="extensions">
         <ol class="extensions-list">
@@ -253,10 +166,7 @@
         </ol>
       </div>
 
-      <footer>
-        <img class="logo" src="images/elite_logo.png" alt="" />
-        <p class="logo-text">Business English Program</p>
-      </footer>
+      {% include "page-footer.html" %}
     </section>
   </body>
 </html>
