@@ -45,7 +45,9 @@ def create_template_mapping(
     unit_row = 1 + ((unit - 1) * 13)
     # Create substitution mapping
     template_mapping = dict()
-    template_mapping["static_path"] = pathlib.Path(__file__).parent.resolve() / "static/"
+    template_mapping["static_path"] = (
+        pathlib.Path(__file__).parent.resolve() / "static/"
+    )
     template_mapping["level"] = level
     # These are used for the page header
     template_mapping["unit"] = unit
@@ -99,6 +101,7 @@ def render_template(template_mapping: dict[str, str]) -> str:
     output_text = template.render(template_mapping)
     return output_text
 
+
 # Output PDF
 def output_pdf(contents: str, filename: str):
     # Log WeasyPrint output
@@ -129,7 +132,9 @@ def main(
                 )
                 presentation_contents = render_template(template_mapping)
                 # Create final path if it doesn't exist
-                pathlib.Path(f"{output_path}/Level {level}/").mkdir(parents=True, exist_ok=True)
+                pathlib.Path(f"{output_path}/Level {level}/").mkdir(
+                    parents=True, exist_ok=True
+                )
                 print(f"Output path: {output_path}/Level {level}/")
                 # Output PDF
                 output_filename = (
