@@ -1,7 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from weasyprint import HTML
-from string import Template
 import pathlib
 import logging
 import jinja2
@@ -91,19 +90,6 @@ def create_template_mapping(
     return template_mapping
 
 
-# Open HTML template file and return contents as string
-def get_template(filename: str) -> str:
-    with open(filename, "r") as template_file:
-        template_file_contents = template_file.read()
-    return template_file_contents
-
-
-# Substitute vars in template string
-def fill_template(template: str, template_mapping: dict[str, str]) -> str:
-    template_string = Template(template)
-    return template_string.safe_substitute(template_mapping)
-
-
 # Use Jinja to render a template into HTML
 def render_template(template_mapping: dict[str, str]) -> str:
     template_loader = jinja2.FileSystemLoader(searchpath="./templates/")
@@ -128,7 +114,6 @@ def main(
     levels: list,
     units: list,
     lessons: list,
-    template_filename: str = "EB-presentation-template.html",
     output_path: str = pathlib.Path(__file__).parent.parent.absolute() / "output/",
 ):
     for level in levels:
@@ -142,13 +127,7 @@ def main(
                 template_mapping = create_template_mapping(
                     data=data, level=level, unit=unit, lesson=lesson
                 )
-                # # Get contents of HTML template file
-                # template_file_contents = get_template(filename=template_filename)
-                # # Substitute
-                # template_filled = fill_template(
-                #     template=template_file_contents, template_mapping=template_mapping
-                # )
-                template_filled = render_template(template_mapping)
+                presentation_contents = render_template(template_mapping)
                 # Create final path if it doesn't exist
                 pathlib.Path(f"{output_path}/Level {level}/").mkdir(parents=True, exist_ok=True)
                 print(f"Output path: {output_path}/Level {level}/")
@@ -156,7 +135,7 @@ def main(
                 output_filename = (
                     f"{output_path}/Level {level}/EB{level}U{unit}L{lesson}.pdf"
                 )
-                output_pdf(contents=template_filled, filename=output_filename)
+                output_pdf(contents=presentation_contents, filename=output_filename)
 
 
 # # There are 4 levels
