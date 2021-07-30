@@ -46,6 +46,7 @@ def create_template_mapping(
     unit_row = 1 + ((unit - 1) * 13)
     # Create substitution mapping
     template_mapping = dict()
+    template_mapping["static_path"] = pathlib.Path(__file__).parent.resolve() / "static/"
     template_mapping["level"] = level
     # These are used for the page header
     template_mapping["unit"] = unit
