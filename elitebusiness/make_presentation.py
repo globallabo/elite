@@ -4,7 +4,10 @@ from weasyprint import HTML
 import pathlib
 import logging
 import jinja2
+import typer
 
+
+app = typer.Typer(help="Create presentation files for Elite lessons")
 
 # Find vocabulary in target sentence and underline it
 def underline_vocab(target: str, vocabs: list[str]) -> str:
@@ -113,11 +116,35 @@ def output_pdf(contents: str, filename: str):
     html.write_pdf(filename)
 
 
-def main(
-    levels: list,
-    units: list,
-    lessons: list,
-    output_path: str = pathlib.Path(__file__).parent.parent.absolute() / "output/",
+@app.command()
+def presentations(
+    levels: list[int] = typer.Option(
+        [1, 2, 3],
+        "--level",
+        "-L",
+        help="Specify a level to create a presentation for. Can be repeated for multiple levels.",
+        show_default="all levels",
+    ),
+    units: list[int] = typer.Option(
+        [1, 2, 3, 4, 5, 6],
+        "--unit",
+        "-u",
+        help="Specify a unit to create a presentation for. Can be repeated for multiple unit.",
+        show_default="all units",
+    ),
+    lessons: list[int] = typer.Option(
+        [1, 2, 3],
+        "--lesson",
+        "-l",
+        help="Specify a lesson to create a presentation for. Can be repeated for multiple lessons.",
+        show_default="all levels",
+    ),
+    output_path: str = typer.Option(
+        pathlib.Path(__file__).parent.parent.absolute() / "output/",
+        "--outputpath",
+        "-o",
+        help="The path where the PDF files will be saved.",
+    ),
 ):
     for level in levels:
         print(f"Level {level}")
@@ -161,7 +188,8 @@ if __name__ == "__main__":
     # levels = [1, 2, 3]
     # units = [1, 2, 3, 4, 5, 6]
     # lessons = [1, 2, 3]
-    levels = [2]
-    units = [4]
-    lessons = [1, 2, 3]
-    main(levels, units, lessons)
+    # levels = [2]
+    # units = [4]
+    # lessons = [1, 2, 3]
+    # main(levels, units, lessons)
+    app()
