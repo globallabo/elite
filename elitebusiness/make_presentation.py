@@ -5,6 +5,7 @@ import pathlib
 import logging
 import jinja2
 import typer
+from typing import Optional
 
 
 app = typer.Typer(help="Create presentation files for Elite lessons")
@@ -116,24 +117,24 @@ def output_pdf(contents: str, filename: str):
     html.write_pdf(filename)
 
 
-@app.command()
+@app.command(help="Generate the PDF files for each lesson.")
 def presentations(
-    levels: list[int] = typer.Option(
-        [1, 2, 3],
+    levels: Optional[list[int]] = typer.Option(
+        None,
         "--level",
         "-L",
         help="Specify a level to create a presentation for. Can be repeated for multiple levels.",
         show_default="all levels",
     ),
-    units: list[int] = typer.Option(
-        [1, 2, 3, 4, 5, 6],
+    units: Optional[list[int]] = typer.Option(
+        None,
         "--unit",
         "-u",
         help="Specify a unit to create a presentation for. Can be repeated for multiple unit.",
         show_default="all units",
     ),
-    lessons: list[int] = typer.Option(
-        [1, 2, 3],
+    lessons: Optional[list[int]] = typer.Option(
+        None,
         "--lesson",
         "-l",
         help="Specify a lesson to create a presentation for. Can be repeated for multiple lessons.",
@@ -146,6 +147,13 @@ def presentations(
         help="The path where the PDF files will be saved.",
     ),
 ):
+    # Check if levels/units/lessons were set or if they should use defaults
+    if not levels:
+        levels = [1, 2, 3]
+    if not units:
+        units = [1, 2, 3, 4, 5, 6]
+    if not lessons:
+        lessons = [1, 2, 3]
     for level in levels:
         print(f"Level {level}")
         # Get data from Google Sheet
