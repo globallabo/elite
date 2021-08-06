@@ -177,26 +177,5 @@ def presentations(
                 output_pdf(contents=presentation_contents, filename=output_filename)
 
 
-# # There are 4 levels
-# # levels = [1, 2, 3, 4]
-# levels = [1, 2, 3]
-# # There are 6 units per level
-# # units = [1, 2, 3, 4, 5, 6]
-# units = [2]
-# # There are 4 lessons per unit, but the last is a review unit with no materials
-# lessons = [1, 2, 3]
-# # lessons = [3]
-# # Filename for HTML Template
-# template_filename = 'EB-presentation-template.html'
-# # output_path = f'/Users/cbunn/Documents/Employment/5 Star/Google Drive/All Stars Second Edition/All Stars Second Edition/Worksheets/Level {level}/'
-# output_path = '/Users/cbunn/projects/elitebusiness/output/'
 if __name__ == "__main__":
-    # There are 4 levels, but level 4 isn't ready
-    # levels = [1, 2, 3]
-    # units = [1, 2, 3, 4, 5, 6]
-    # lessons = [1, 2, 3]
-    # levels = [2]
-    # units = [4]
-    # lessons = [1, 2, 3]
-    # main(levels, units, lessons)
     app()
