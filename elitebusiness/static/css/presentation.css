@@ -32,16 +32,6 @@ body {
   font-family: "NotoSansJP-Regular";
   color: #666666;
 }
-.a-label {
-  color: #6fa8dc;
-}
-.b-label {
-  color: #e06666;
-}
-.jp-text {
-  /* color: #E69138; */
-  color: #e06666;
-}
 
 section {
   page-break-after: always;
@@ -49,20 +39,12 @@ section {
 }
 
 header {
-  /* background-color: green; */
   top: 0;
   left: 0;
-  /* width: 100%; */
-  /* display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center; */
 }
 header .label {
-  /* background-color: blue; */
   top: 0;
   left: 0;
-  /* width: 100%; */
   padding: 2em;
   font-size: 14pt;
   display: flex;
@@ -77,11 +59,9 @@ header .label .page-number {
   margin-right: 0;
 }
 footer {
-  /*background-color: red;*/
   position: absolute;
   bottom: 0;
   right: 0;
-  /* width: 100%; */
   padding: 2em;
   display: flex;
   flex-direction: column;
@@ -110,16 +90,25 @@ footer .logo-text {
 .dialogue-page .dialogue-en {
   margin-bottom: 1.5em;
 }
-.a-label,
-.b-label {
-  font-weight: bold;
-  margin-right: 1em;
-}
 .dialogue-page .dialogue-jp {
   font-size: 17pt;
   margin-top: -2em;
   margin-left: 2.8em;
   margin-bottom: 1em;
+}
+.a-label,
+.b-label {
+  font-weight: bold;
+  margin-right: 1em;
+}
+.a-label {
+  color: #6fa8dc;
+}
+.b-label {
+  color: #e06666;
+}
+.jp-text {
+  color: #e06666;
 }
 
 /* target is used on both target-page and substitutions-page */
@@ -148,8 +137,6 @@ footer .logo-text {
   margin: 1em 2em 0 3em;
 }
 .substitutions-page .substitutions .vocab-list li {
-  /* float: left;
-  margin-right: 3em; */
   margin-bottom: 1.3em;
 }
 .substitutions-page .substitutions .vocab-list .vocab-jp {
@@ -161,8 +148,6 @@ footer .logo-text {
 .vocab-page .vocab {
   font-size: 26pt;
   margin: 1em 2em 0 3em;
-}
-.vocab-page .vocab .vocab-list {
 }
 .vocab-page .vocab .vocab-list li {
   margin-bottom: 1.5em;
@@ -178,6 +163,5 @@ footer .logo-text {
 .extensions-page .extension-jp {
   font-size: 17pt;
   margin-top: -3em;
-  /* margin-left: 0.5em; */
   margin-bottom: 2em;
 }
