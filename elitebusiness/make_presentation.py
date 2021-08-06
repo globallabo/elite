@@ -183,7 +183,7 @@ def presentations(
         show_default="all levels",
     ),
     output_path: str = typer.Option(
-        Path(__file__).parent.parent.absolute() / "output/",
+        Path(__file__).parent.parent.resolve() / "output/",
         "--outputpath",
         "-o",
         help="The path where the PDF files will be saved.",
