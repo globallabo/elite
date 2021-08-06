@@ -3,7 +3,8 @@ from pathlib import Path
 from typing import Optional
 import logging
 
-# third party importsimport gspread
+# third party imports
+import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from weasyprint import HTML
 import jinja2
