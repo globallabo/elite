@@ -42,15 +42,17 @@ def get_data_for_level(level: str) -> list[list[str]]:
         list[list[str]]: The contents of the sheet in list form (two-dimensional).
     """
     # Fetch data from Google Sheet
+    sheetname = "Copy of ビジネス英語研修_online_対訳付き"
+    credsfile = Path(__file__).parent.parent.resolve() / "creds.json"
     scope = [
         "https://spreadsheets.google.com/feeds",
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive",
     ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name(credsfile, scope)
     client = gspread.authorize(creds)
-    sheet = client.open("Copy of ビジネス英語研修_online_対訳付き").worksheet(f"level_{level}")
+    sheet = client.open(sheetname).worksheet(f"level_{level}")
     return sheet.get_all_values()
 
 
