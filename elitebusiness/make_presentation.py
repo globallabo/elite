@@ -1,11 +1,13 @@
-import gspread
+# standard library imports
+from pathlib import Path
+from typing import Optional
+import logging
+
+# third party importsimport gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from weasyprint import HTML
-import pathlib
-import logging
 import jinja2
 import typer
-from typing import Optional
 
 
 app = typer.Typer(help="Create presentation files for Elite lessons")
@@ -49,9 +51,7 @@ def create_template_mapping(
     unit_row = 1 + ((unit - 1) * 13)
     # Create substitution mapping
     template_mapping = dict()
-    template_mapping["static_path"] = (
-        pathlib.Path(__file__).parent.resolve() / "static/"
-    )
+    template_mapping["static_path"] = Path(__file__).parent.resolve() / "static/"
     template_mapping["level"] = level
     # These are used for the page header
     template_mapping["unit"] = unit
@@ -141,7 +141,7 @@ def presentations(
         show_default="all levels",
     ),
     output_path: str = typer.Option(
-        pathlib.Path(__file__).parent.parent.absolute() / "output/",
+        Path(__file__).parent.parent.absolute() / "output/",
         "--outputpath",
         "-o",
         help="The path where the PDF files will be saved.",
@@ -167,9 +167,7 @@ def presentations(
                 )
                 presentation_contents = render_template(template_mapping)
                 # Create final path if it doesn't exist
-                pathlib.Path(f"{output_path}/Level {level}/").mkdir(
-                    parents=True, exist_ok=True
-                )
+                Path(f"{output_path}/Level {level}/").mkdir(parents=True, exist_ok=True)
                 print(f"Output path: {output_path}/Level {level}/")
                 # Output PDF
                 output_filename = (
