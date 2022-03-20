@@ -1,6 +1,16 @@
-# Elite Business English Program
+# Elite Business English Materials Generation
+
+![Google Sheets + Jinja + Python = PDF](/GSplusJinja.png)
 
 The Elite materials can be automatically generated using data from Google Sheets and formatting from Jinja HTML templates.
+
+These scripts make it possible to automatically generate a full set of curriculum materials. The templates are made using Jinja for fine control of layout and typography. The lesson content, such as vocabulary words and target sentences, is kept in a Google Sheets spreadsheet for best visibility to the team and so any team member can easily make changes to the content. The Weasyprint package for Python is used to convert the HTML and CSS to PDF files which are then distributed to the team and printed for use in the classroom.
+
+This system makes it easy to create and maintain a large and complex set of materials. For example, in Elite, there are three distinct levels, each with six units of three lessons each. Any member of the team can change the lesson content. And if the appearance or layout needs to be changed, only the template needs to be changed and the scripts will output all the materials in seconds. Doing this by hand would require editing up to 54 separate documents.
+
+## Example Output
+
+![Elite text pages](/elite-text-example.png)
 
 ## Usage
 
